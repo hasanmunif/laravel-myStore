@@ -1,16 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-  @if ($errors->any())
-    <div class="alert alert-danger">
-      <strong>Data:</strong> not save <br>
-      <ul>
-        @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
-  @endif
   <div class="row align-items-center justify-content-center h-100">
     <div class="col-12">
       <div class="card mt-md-3">

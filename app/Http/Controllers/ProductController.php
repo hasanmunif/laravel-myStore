@@ -40,7 +40,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+      return view("product");
     }
 
     /**
@@ -61,6 +61,7 @@ class ProductController extends Controller
       ]);
 
       $product::create($request->all());
+      Toastr::success('New Data Has Been added','Success');
       return redirect('product');
     }
 
@@ -101,7 +102,7 @@ class ProductController extends Controller
           'product_image' => 'required',
       ]);
       $product->update($request->all());
-      Toastr::success('Data berhasil di update','Success');
+      Toastr::success('Data Has Been Updated','Success');
       return redirect('product');
     }
 
@@ -114,7 +115,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
       $product->delete();
-      Toastr::success('Data berhasil di hapus','Success');
+      Toastr::success('Data Has Been Delete','Success');
       return redirect('product');
     }
 }
