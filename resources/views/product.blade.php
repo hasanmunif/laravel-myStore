@@ -42,12 +42,15 @@
               <form action="{{ route('product.destroy', $pr->id) }}" method="post">
                 @csrf
                 @method('DELETE')
-                <a href="{{ route('product.show', $pr->id) }}" class="btn btn-info">
-                <i class="fas fa-info"></i></a>
-                <a href="{{ route('product.edit', $pr->id) }}" class="btn btn-warning">
-                <i class="fas fa-edit"></i></a>
+                <a href="{{ route('product.show', $pr->product_slug) }}" class="btn btn-info">
+                  <i class="fas fa-info"></i>
+                </a>
+                <a href="{{ route('product.edit', $pr->product_slug) }}" class="btn btn-warning">
+                  <i class="fas fa-edit"></i>
+                </a>
                 <button type="submit" class="btn btn-danger">
-                <i class="fas fa-trash"></i></button>
+                  <i class="fas fa-trash"></i>
+                </button>
               </form>
             </td>
         </tr>    

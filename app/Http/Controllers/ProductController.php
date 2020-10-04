@@ -15,6 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+      $posts = Product::orderBy('created_at', 'DESC')->get();
       $product = Product::all();
       return view('product', compact('product'));
     }
@@ -40,7 +41,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-      return view("product");
+      return view("product.create");
     }
 
     /**
@@ -56,8 +57,6 @@ class ProductController extends Controller
         'product_slug' => 'required',
         'product_image' => 'required',
         'product_price' => 'required',
-        'created_at' => 'required',
-        'updated_at' => 'required'
       ]);
 
       $product::create($request->all());
@@ -73,7 +72,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-      return view("product.show", compact("product"));
+      // return view("product.show", compact("product"));
     }
 
     /**
@@ -82,9 +81,12 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($slug)
     {
-      return view('product.edit', compact('product'));
+      $product = Product::where('product_slug', $slug)
+                ->firstOrFail();
+
+        return view('product.edit', compact('product'));
     }
 
     /**
