@@ -11,7 +11,7 @@ class Product extends Model
     
     protected $fillable = [
         'product_title','product_slug','product_image', 'product_price'
-    ];
+      ];
     
       protected $table = "products";
 }
