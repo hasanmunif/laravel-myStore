@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Exercise extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-        'product_title','product_slug','product_image', 'product_price'
+        'nama_murid', 'status_murid', 'nilai_ujian', 'nilai_pts', 'nilai_uas'
     ];
-    
-      protected $table = "products";
 }
