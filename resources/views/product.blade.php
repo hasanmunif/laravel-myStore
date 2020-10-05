@@ -43,13 +43,13 @@
                 @csrf
                 @method('DELETE')
                 <a href="{{ route('product.show', $pr->product_slug) }}" class="btn btn-info">
-                  <i class="fas fa-info"></i>
+                  <i class="fas fa-info-circle"></i>
                 </a>
                 <a href="{{ route('product.edit', $pr->product_slug) }}" class="btn btn-warning">
-                  <i class="fas fa-edit"></i>
+                  <i class="fas fa-pen-square"></i>
                 </a>
                 <button type="submit" class="btn btn-danger">
-                  <i class="fas fa-trash"></i>
+                  <i class="fas fa-trash-alt"></i>
                 </button>
               </form>
             </td>
