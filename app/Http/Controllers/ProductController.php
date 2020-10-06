@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index()
     {
       // $posts = Product::orderBy('created_at', 'ASC')->get();
-      $product = Product::Pjaginate(5);
+      $product = Product::Paginate(5);
       return view('product', compact('product'));
     }
 
