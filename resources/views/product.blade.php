@@ -2,14 +2,14 @@
 
 @section('content')
   <div class="container-fluid">
-    <div class="card bg-info">
+    <div class="card">
       <div class="card-header border-0">
         <h3 class="card-title">
           <i class="fas fa-th mr-1"></i>
           Laptop 
         </h3>
         <div class="card-tools">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
             <i class="fas fa-plus-circle"></i>
             Create new Data
             @yield('modal')
@@ -61,6 +61,7 @@
             </tr>
           @endforelse
         </table>
+        {{ $product->links() }}
       </div>
       <div class="row">
         <div class="col d-flex justify-content-right">
