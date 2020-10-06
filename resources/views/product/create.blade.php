@@ -1,39 +1,40 @@
 @extends('layouts.app')
 
-@section('modal')
-  <!-- modal -->
-  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+@section('content')
+<div class="row align-items-center justify-content-center h-100">
+    <div class="col-8">
+      <div class="card mt-md-3">
+        <div class="card-header">
+          <div class="row">
+            <div class="col text-left">Update Product</div>
+            <div class="col text-right">
+            <a href="/product" class="btn btn-xs btn-dark">
+              <i class="fa fa-arrow-circle-left"></i> Back  
+            </a>
+          </div>
         </div>
-        <div class="modal-body">
-          <form action="{{ route('product.store') }}" method="post">
-            @csrf
-            <div class="form-group">
-              <label for="#">Product</label>
-              <input type="text" name="product_title" class="form-control" placeholder="Product Name" autocomplete="off">
-            </div>
-            <div class="form-group">
-              <label for="#">Slug</label>
-              <input type="text" name="product_slug" class="form-control" placeholder="Merk" autocomplete="off">
-            </div>
-            <div class="form-group">
-              <label for="#">Image</label>
-              <input type="text" name="product_image" class="form-control" placeholder="Image" autocomplete="off">
-            </div>
-            <div class="form-group">
-              <label for="#">Price</label>
-              <input type="text" name="product_price" class="form-control" placeholder="Price" autocomplete="off">
-            </div>
-              <button type="submit" class="btn btn-primary">Save</button>
-          </form>     
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+      <div class="card-body">
+        <form action="{{ route('product.update', $product->id) }}" method="post">
+          @csrf
+          @method('PUT')
+          <div class="form-group">
+            <label for="#">Product</label>
+            <input type="text" name="product_title" class="form-control" placeholder="Nama Product" value="{{ $product->product_title }}" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="#">Slug</label>
+            <input type="text" name="product_slug" class="form-control" placeholder="Nama Merk" value="{{ $product->product_slug }}" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="#">Image</label>
+            <input type="text" name="product_image" class="form-control" placeholder="Harga Beli" value="{{ $product->product_image }}" autocomplete="off">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            <i class="fas fa-save"></i>
+            Save
+          </button>
+        </form>                    
         </div>
       </div>
     </div>

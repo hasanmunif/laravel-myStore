@@ -9,10 +9,9 @@
           Laptop 
         </h3>
         <div class="card-tools">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
+          <button type="button" class="btn btn-success">
             <i class="fas fa-plus-circle"></i>
             Create new Data
-            @yield('modal')
           </button>
           <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
             <i class="fas fa-minus"></i>
