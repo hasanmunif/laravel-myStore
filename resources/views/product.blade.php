@@ -61,16 +61,19 @@
             </tr>
           @endforelse
         </table>
+        <br>
         {{ $product->links() }}
       </div>
-      <div class="row">
-        <div class="col d-flex justify-content-right">
-          <button class="btn btn-outline-info">
-            <a href="/" rel="noopener noreferrer">
-              <i class="fas fa-arrow-circle-left"></i>
-              back to home
-            </a>
-          </button>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-outline-info justify-content-end">
+              <a href="/" rel="noopener noreferrer">
+                <i class="fas fa-arrow-circle-left"></i>
+                back to home
+              </a>
+            </button>
+          </div>
         </div>
       </div>
     </div>  
