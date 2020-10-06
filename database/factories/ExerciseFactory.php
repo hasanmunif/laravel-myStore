@@ -24,9 +24,9 @@ class ExerciseFactory extends Factory
         return [
             'nama_murid' => $this->faker->name(),
             'status_murid' => $this->faker->boolean(),
-            'nilai_ujian' => $this->faker->unique()->numberBetween(0, 100),
-            'nilai_pts' => $this->faker->unique()->numberBetween(0, 100),
-            'nilai_uas' => $this->faker->unique()->numberBetween(0, 100),
+            'nilai_ujian' => $this->faker->numberBetween(0, 100),
+            'nilai_pts' => $this->faker->numberBetween(0, 100),
+            'nilai_uas' => $this->faker->numberBetween(0, 100),
         ];
     }
 }
