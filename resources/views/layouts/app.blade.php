@@ -251,7 +251,7 @@
             </ul>
           </li> -->
           <li class="nav-item">
-            <a href="product" class="nav-link">
+            <a href="{{ url('product') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <P>
                 Product

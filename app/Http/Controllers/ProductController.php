@@ -8,116 +8,87 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-      // $posts = Product::orderBy('created_at', 'ASC')->get();
+      $product = Product::orderBy('created_at', 'desc')->get();
       $product = Product::paginate(5);
       return view('product', compact('product'));
     }
 
     public function showProduct($slug)
     {
-      $product = Product::where('product_slug', $slug)
-              ->firstOrFail();
-
-      // if (!$data) {
-      //     abort(404);
-      // }
-      // Atau dengan firstOrFail();
-
-      // dd($data);
-      return view('product', compact('product'));
+      $product = \DB::table('products')->where('product_slug',$slug)->first();
+      return view('product.show', compact('product'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    
+    public function tambah()
     {
       return view("product.create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, Product $product)
+    public function simpan(Request $request)
     {
-      $request->validate([
-        'product_title' => 'required',
-        'product_slug' => 'required',
-        'product_image' => 'required',
-        'product_price' => 'required',
-      ]);
+      $product = new Product;
+      $product->product_title = $request->product_title;
+      $product->product_slug =  \Str::slug($request->product_title);
+      $product->product_image = $request->product_image;
+      $product->product_price = $request->product_price;
 
-      $product::create($request->all());
-      Toastr::success('New Data Has Been added','Success');
-      return redirect('product');
+      if (Product::where('product_slug', $product->product_slug)->exists()) {
+        return redirect('/tambah');
+        Toastr::error("The slug can't same",'error');
+      } else {
+        $product->save();
+        Toastr::success('New ' . $request['product_title'] . ' successfully added','Success');
+        return redirect('product');
+      }
+
+      // cara 2
+      // $request->validate([
+      //   'product_title' => 'required',
+      //   'product_slug' => 'required',
+      //   'product_image' => 'required',
+      //   'product_price' => 'required',
+      // ]);
+      // $product::create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
+    public function edit(Product $product)
     {
-      // return view("product.show", compact("product"));
+      $data = $product;
+      return view('product.edit', compact('data'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($slug)
+    public function update(Request $request)
     {
-      $product = Product::where('product_slug', $slug)
-                ->firstOrFail();
+      $data = [
+        'id' => $request->id,
+        'product_title' => $request->product_title,
+        'product_slug' => \Str::slug($request->product_title),
+        'product_price' => $request->product_price,
+        'product_image' => $request->product_image,
+      ];
 
-        return view('product.edit', compact('product'));
+      if (Product::where('product_slug', \Str::slug($request->product_title))->exists()) {
+        $ubah = [
+          'id' => $request->id,
+          'product_price' => $request->product_price,
+          'product_image' => $request->product_image,
+        ];
+        Product::where('id', $request->id)->update($ubah);
+        Toastr::warning('Data ' . $request['product_title'] . ' not changed, but another data is still changed','Warning');
+        return redirect('product');
+      } else {
+        Product::where('id', $request->id)->update($data);
+        Toastr::success('Data ' . $request['product_title'] . ' successfully changed','Success');
+        return redirect('product');
+      }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
-    {
-      $request->validate([
-          'product_title' => 'required',
-          'product_slug'    => 'required',
-          'product_image' => 'required',
-      ]);
-      $product->update($request->all());
-      Toastr::success('Data Has Been Updated','Success');
-      return redirect('product');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
+    public function delete(Product $product)
     {
       $product->delete();
-      Toastr::success('Data Has Been Delete','Success');
+      Toastr::success('Data successfully Delete','Success');
       return redirect('product');
     }
 }
