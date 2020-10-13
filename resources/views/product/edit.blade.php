@@ -29,7 +29,7 @@
           </div>
           <div class="form-group">
             <label for="#">Price</label>
-            <input type="text" name="product_price" class="form-control" placeholder="Price" value="{{ $data->product_price }}" autocomplete="off">
+            <input type="text" name="product_price" class="form-control" placeholder="Price" value="{{ number_format($data->product_price,2,',','.') }}" autocomplete="off">
           </div>
           <button type="submit" class="btn btn-primary btn-block">
             <i class="fas fa-save"></i>

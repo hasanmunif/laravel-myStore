@@ -37,7 +37,7 @@
               <td class="text-md-center">{{ $pr->product_title }}</td>
               <!-- <td class="text-md-center">{{ $pr->product_slug }}</td>  -->
               <!-- <td class="text-md-center">{{ $pr->product_image }}</td> -->
-              <td class="text-md-center">Rp. {{ $pr->product_price }}</td>
+              <td class="text-md-center">Rp. {{ number_format($pr->product_price,2,",",".") }}</td>
               <td class="text-md-center">
                 <form action="/product/delete/{{ $pr->product_slug }}" method="post">
                   <a href="{{ url('/product', $pr->product_slug) }}" class="btn btn-info">
