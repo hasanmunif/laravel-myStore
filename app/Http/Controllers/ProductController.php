@@ -35,7 +35,7 @@ class ProductController extends Controller
       $product->product_price = $request->product_price;
 
       if (Product::where('product_slug', $product->product_slug)->exists()) {
-        Toastr::error("The slug can't same",'error');
+        Toastr::error("The product name has been taken",'error');
         return redirect('/tambah');
       } else {
         $product->save();
