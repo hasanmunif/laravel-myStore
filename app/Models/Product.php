@@ -11,7 +11,16 @@ class Product extends Model
     
     protected $fillable = [
         'product_title','product_slug','product_image', 'product_price'
-      ];
-    
-      protected $table = "products";
+    ];
+    protected $table = "products";
+
+    public function descriptionProduct()
+    {
+      return $this->hasOne(DescriptionProduct::class);
+    }
+
+    public function category()
+    {
+      return $this->belongsTo(Category::class);
+    }
 }
