@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
+use App\Exports\ProductsExport;
+use App\Imports\ProductsImport;
+use Maatwebsite\Excel\Facades\Excel;
+// use App\Http\Controllers\PDF;
+use PDF;
 
 class ProductController extends Controller
 {
@@ -90,5 +96,36 @@ class ProductController extends Controller
       $product->delete();
       Toastr::success('Data successfully Delete','Success');
       return redirect('product');
+    }
+
+    public function exportXl()
+    {
+      return Excel::download(new ProductsExport, 'products.xlsx');
+    }
+
+    public function exportCSV()
+    {
+      return Excel::download(new ProductsExport, 'products.csv');
+    }
+
+    public function exportPDF()
+    {
+      // return Excel::download(new ProductsExport, 'products.pdf', 'pdf');
+      $product = Product::all();
+      $pdf = PDF::loadView('pdf', ['product' => $product]);  
+      return $pdf->download('products.pdf');
+      // Toastr::success('PDF successfully downloaded','Success');
+    }
+
+    public function upload()
+    {
+      return view('product.uploadData');
+    }
+
+    public function uploadData(Request $request)
+    {
+      Excel::import(new ProductsImport, $request->file('file')->store('temp'));
+      return redirect('/product');
+      Toastr::success('Data successfully uploaded','Success');
     }
 }
