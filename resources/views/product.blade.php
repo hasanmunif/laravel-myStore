@@ -61,9 +61,9 @@
                 </tr>
               @endforelse
             </table>
-            <br>
+            {{-- <br>
             <caption><i>*Harga dapat berubah sewaktu-waktu</i></caption>
-            <br>
+            <br> --}}
             {{ $product->links() }}
           </div>
           <div class="card-footer border-0">
